@@ -4,12 +4,22 @@ import WordRow from "../components/WordRow";
 
 const GamePage = () => {
   const word = "camera";
-  const wordArr = word.split("");
+  const word_arr = word.split("");
+  const user_word_array = [
+    { value: ["m", "a", "r", "k", "e", "t"], status: "incorrect" },
+    { value: ["c", "a", "m", "e", "r", "a"], status: "correct" },
+    { value: ["", "", "", "", "", ""], status: "pending" },
+    { value: ["", "", "", "", "", ""], status: "pending" },
+    { value: ["", "", "", "", "", ""], status: "pending" },
+    { value: ["", "", "", "", "", ""], status: "pending" },
+  ];
   return (
     <div>
       wordle
       <div>
-        <WordRow wordArr={wordArr}/>
+        {user_word_array.map((word_obj) => (
+          <WordRow word_obj={word_obj} word={word_arr} />
+        ))}
       </div>
     </div>
   );
