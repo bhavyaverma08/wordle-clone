@@ -2,12 +2,24 @@ import React from "react";
 import WordleLetter from "./WordleLetter";
 
 const WordRow = (props) => {
-  const { word_obj = {}, word,handleChangeLetter } = props;
+  const {
+    word_obj,
+    word_letters,
+    word_status,
+    ans_word,
+    userWordArr,
+    handleChangeLetter,
+  } = props;
   return (
     <div style={{ display: "flex", margin: "0px 0px 5px 0px" }}>
-      {word_obj.value.map((el, index) => {
-        return <WordleLetter letter={el} word={word} index={index} handleChangeLetter={handleChangeLetter} word_obj={word_obj} />;
-      })}
+      <WordleLetter
+        word_letters={word_letters}
+        word={ans_word}
+        handleChangeLetter={handleChangeLetter}
+        word_obj={word_obj}
+        word_status={word_status}
+      />
+      <p style={{ color: "#fff" }}> {word_status}</p>
     </div>
   );
 };

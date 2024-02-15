@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import theme from "../theme/theme";
 
 const OTPgenerator = () => {
   let [otpfields, setOtpFields] = useState(Array(6).fill(""));
@@ -53,27 +54,42 @@ const OTPgenerator = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column",
+        flexDirection: "row",
         margin: "auto",
       }}
     >
-      <h1 className="text-2xl my-5">OTP</h1>
-      <div className="flex gap-1 justify-center items-center">
-        {otpfields.map((_, index) => {
-          return (
-            <input
-              key={index}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-              onPaste={handlePaste}
-              ref={(el) => (otpinputref.current[index] = el)}
-              onChange={(e) => handleOtp(e, index)}
-              value={otpfields[index]}
-              type="text"
-              className="w-12 h-12 text-center border border-gray-300 rounded"
-            />
-          );
-        })}
-      </div>
+      {otpfields.map((_, index) => {
+        return (
+          <input
+            key={index}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            onPaste={handlePaste}
+            ref={(el) => (otpinputref.current[index] = el)}
+            onChange={(e) => handleOtp(e, index)}
+            value={otpfields[index]}
+            type="text"
+            style={{
+              width: "52px",
+              height: "52px",
+              background: theme.palette.primary.main,
+              // border:
+              //   getStatus() === "empty_letter"
+              //     ? `2px solid ${theme.palette.primary.main}`
+              //     : `2px solid transparent`,
+              color: "#fff",
+              fontWeight: "bolder",
+              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0px 5px 0px 0px",
+              fontSize: "24px",
+              fontFamily: "monospace",
+              textTransform:"capitalize"
+            }}
+          />
+        );
+      })}
     </div>
   );
 };
