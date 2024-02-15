@@ -1,5 +1,6 @@
 import React from "react";
 import theme from "../theme/theme";
+import "./wordLetter.scss";
 
 const colorMapping = {
   incorrect_letter: theme.palette.primary.main,
@@ -9,38 +10,57 @@ const colorMapping = {
 };
 
 const WordleLetter = (props) => {
-  const { letter = "a", word, index } = props;
+  const {
+    letter = { letterVal: "", activeStatus: false },
+    word,
+    index,
+    user_word_array,
+    handleChangeLetter,
+    word_obj,
+  } = props;
 
   const getStatus = () => {
-    const letter_position = word.findIndex((el) => el === letter);
-    if (word[index] === letter) {
+    const letter_position = word.findIndex((el) => el === letter.letterVal);
+    if (word_obj.status === "active") {
+      return "empty_letter";
+    } else if (word[index] === letter.letterVal) {
       return "correct_letter";
     } else if (letter_position > -1) {
       return "present_letter";
-    } else if (letter) {
+    } else if (letter.letterVal) {
       return "incorrect_letter";
     } else {
       return "empty_letter";
     }
   };
+  console.log("letter", letter);
   return (
-    <div
-      style={{
-        width: "52px",
-        height: "52px",
-        background: colorMapping[getStatus()],
-        border: getStatus() === "empty_letter" ? `1px solid ${theme.palette.primary.main}` : `1px solid transparent`,
-        color: "#fff",
-        fontWeight: "bold",
-        textAlign: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: "0px 5px 0px 0px",
-      }}
-    >
-      <p style={{ fontSize: "24px" }}> {letter.toUpperCase()}</p>
-    </div>
+    <>
+      <input
+        autoFocus={letter.activeStatus}
+        disabled={letter.letterVal !== ""}
+        style={{
+          width: "52px",
+          height: "52px",
+          background: colorMapping[getStatus()],
+          border:
+            getStatus() === "empty_letter"
+              ? `2px solid ${theme.palette.primary.main}`
+              : `2px solid transparent`,
+          color: "#fff",
+          fontWeight: "bold",
+          textAlign: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "0px 5px 0px 0px",
+          fontSize: "24px",
+        }}
+        onChange={(e) => handleChangeLetter(e, index)}
+        type="text"
+        value={letter.letterVal.toUpperCase()}
+      ></input>
+    </>
   );
 };
 
