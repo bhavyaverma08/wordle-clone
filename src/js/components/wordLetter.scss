@@ -1,8 +1,40 @@
 input {
-    color: transparent;
-    text-shadow: 0 0 0 #2196f3;
-  
-    &:focus {
-      outline: none;
-    }
+  color: transparent;
+  text-shadow: 0 0 0 #2196f3;
+  caret-color: transparent;
+
+  &:focus {
+    outline: none;
   }
+}
+
+.flip-card-X {
+  transform: rotateX(360deg);
+  transition: transform 1s; /* Standard syntax */
+  transform-style: preserve-3d;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-30px);
+  }
+
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+.flip-card-Y {
+  transform: rotateY(360deg);
+  transition: transform 1s; /* Standard syntax */
+  transform-style: preserve-3d;
+  animation: bounce 2s;
+}

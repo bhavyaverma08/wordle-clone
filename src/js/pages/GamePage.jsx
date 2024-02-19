@@ -126,6 +126,7 @@ const GamePage = () => {
           {userWordArr.map((word_obj, index) => (
             <div
               id={index + word_obj.status}
+              key={index + word_obj.status}
               ref={(el) => (otpinputref.current[index] = el)}
             >
               <WordRow
