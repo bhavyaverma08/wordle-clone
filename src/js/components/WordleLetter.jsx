@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import theme from "../theme/theme";
 import "./wordLetter.scss";
 
@@ -23,6 +23,21 @@ const WordleLetter = (props) => {
   } = props;
   let [wordFields, setwordFields] = useState(word_letters);
   let inputRefs = useRef([]);
+
+  useEffect(() => {
+    // Apply flip-card class with staggered delay
+    inputRefs.current.forEach((inputRef, index) => {
+      const timer = setTimeout(() => {
+        if (word_status === "incorrect") {
+          inputRef.classList.add("flip-card-X");
+        }
+        if (word_status === "correct") {
+          inputRef.classList.add("flip-card-Y");
+        }
+      }, 100 * index); // Multiply delay by index
+      return () => clearTimeout(timer); // Clear timeout on component unmount
+    });
+  }, [word_status]);
 
   const handleOtp = (e, index) => {
     const numericValue = e.target.value.replace(/D/g, "");
@@ -51,9 +66,6 @@ const WordleLetter = (props) => {
   };
   const handleKeyDown = (e, index) => {
     if (e.key === "Enter" && index === 5 && wordFields[index] !== "") {
-      const getNewInput = inputRefs.current.find(
-        (el) => el.id === "0" + "pending"
-      );
       handlePressEnter(word_index, wordFields, otpinputref);
       return;
     }
@@ -91,12 +103,13 @@ const WordleLetter = (props) => {
         return (
           <input
             id={index + word_status}
-            key={index}
+            key={index + word_status}
             onKeyDown={(e) => handleKeyDown(e, index)}
             disabled={isInputDisabled()}
             ref={(el) => (inputRefs.current[index] = el)}
             onChange={(e) => handleOtp(e, index)}
             value={wordFields[index]}
+            className=""
             type="text"
             style={{
               width: "52px",
