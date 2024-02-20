@@ -1,23 +1,22 @@
 import React from "react";
+import theme from "../theme/theme";
 const Footer = (props) => {
-  const { showNext, handleClickNext } = props;
+  const { level } = props;
   return (
     <div
       style={{
-        height: "60px",
+        height: "20px",
         display: "flex",
+        width: "100vw",
         alignItems: "center",
         justifyContent: "center",
+        color: theme.palette.secondary.main,
+        background: theme.palette.primary.main,
       }}
     >
-      {showNext && (
-        <button
-          onClick={handleClickNext}
-          style={{ height: "40px", width: "100px", background: "" }}
-        >
-          <p style={{ margin: "0px" }}>Next Level</p>
-        </button>
-      )}
+      <p style={{ margin: "0px", fontSize: "12px" }}>
+        Developed by Bhavya Verma
+      </p>
     </div>
   );
 };
