@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-You can find the lastest deployed version here 👇🏻
+You can find the lastest deployed version here 👉🏻
 https://master--admirable-otter-7020d8.netlify.app/
 
 ## Available Scripts
