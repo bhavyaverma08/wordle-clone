@@ -3,7 +3,9 @@ import Header from "../components/Header";
 import WordleLetter from "../components/WordleLetter";
 import WordRow from "../components/WordRow";
 import { sixLetterWordsArray } from "../../assets/data/wordArray";
+import ButtonContainer from "../components/ButtonContainer";
 import Footer from "../components/Footer";
+import LayoutTopBottom from "../layouts/LayoutTopBottom";
 
 const initial_word_array = [
   {
@@ -141,8 +143,7 @@ const GamePage = () => {
   };
 
   return (
-    <div>
-      <Header level={level} />
+    <LayoutTopBottom level={level}>
       <div
         style={{ width: "100vw", display: "flex", justifyContent: "center" }}
       >
@@ -168,8 +169,8 @@ const GamePage = () => {
           ))}
         </div>
       </div>
-      <Footer handleClickNext={handleClickNext} showNext={showNext} />
-    </div>
+      <ButtonContainer handleClickNext={handleClickNext} showNext={showNext} />
+    </LayoutTopBottom>
   );
 };
 
