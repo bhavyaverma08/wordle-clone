@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import WordleLetter from "../components/WordleLetter";
 import WordRow from "../components/WordRow";
+import { sixLetterWordsArray } from "../../assets/data/wordArray";
+import Footer from "../components/Footer";
 
 const initial_word_array = [
   {
@@ -31,22 +33,39 @@ const initial_word_array = [
 ];
 
 const GamePage = () => {
-  const word = "camera";
-  const word_arr = word.split("");
   const [userWordArr, setUserWordArr] = useState(initial_word_array);
+  const [actualWord, setActualWord] = useState(sixLetterWordsArray[0].word);
   const otpinputref = useRef([]);
+  const [showNext, setShowNext] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [level, setLevel] = useState(0);
+  const [dictionaryStatus, setDictionaryStatus] = useState([
+    ...sixLetterWordsArray,
+  ]);
 
   // Defining Lodash variable
   const _ = require("lodash");
 
   const isWordCorrect = (user_Arr) => {
-    return _.isEqual(user_Arr, word_arr);
+    return _.isEqual(user_Arr, actualWord.split(""));
   };
+
+  useEffect(() => {
+    const correctWord = userWordArr.findIndex((el) => el.status === "correct");
+    if (correctWord > -1) {
+      setShowNext(true);
+      // update the dictionary here
+    }
+  }, [userWordArr]);
 
   useEffect(() => {
     updateRefForNextWord(currentWordIndex);
   }, [currentWordIndex]);
+
+  useEffect(() => {
+    setUserWordArr(initial_word_array);
+    setActualWord(sixLetterWordsArray[level].word);
+  }, [level]);
 
   const updateRefForNextWord = (currentWordIndex) => {
     if (
@@ -116,9 +135,14 @@ const GamePage = () => {
     } else return;
   };
 
+  const handleClickNext = () => {
+    const updatedLevel = level + 1;
+    setLevel(updatedLevel);
+  };
+
   return (
     <div>
-      <Header />
+      <Header level={level} />
       <div
         style={{ width: "100vw", display: "flex", justifyContent: "center" }}
       >
@@ -133,7 +157,7 @@ const GamePage = () => {
                 word_obj={word_obj}
                 word_letters={word_obj.value}
                 word_status={word_obj.status}
-                ans_word={word_arr}
+                ans_word={actualWord.split("")}
                 otpinputref={otpinputref}
                 word_index={index}
                 handlePressEnter={handlePressEnter}
@@ -144,6 +168,7 @@ const GamePage = () => {
           ))}
         </div>
       </div>
+      <Footer handleClickNext={handleClickNext} showNext={showNext} />
     </div>
   );
 };
