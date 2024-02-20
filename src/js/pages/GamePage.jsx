@@ -67,6 +67,7 @@ const GamePage = () => {
   useEffect(() => {
     setUserWordArr(initial_word_array);
     setActualWord(sixLetterWordsArray[level].word);
+    setShowNext(false);
   }, [level]);
 
   const updateRefForNextWord = (currentWordIndex) => {
