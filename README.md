@@ -5,6 +5,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 You can find the lastest deployed version here 👉🏻
 https://master--admirable-otter-7020d8.netlify.app/
 
+<img width="1440" alt="Screenshot 2024-03-27 at 10 01 53 AM" src="https://github.com/bhavyaverma08/wordle-clone/assets/47973653/8a5aac25-2de9-4dbf-bbf5-12bf4c953bba">
+
 ## Available Scripts
 
 In the project directory, you can run:
